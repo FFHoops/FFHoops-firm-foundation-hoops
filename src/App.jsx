@@ -101,7 +101,13 @@ nav{
   margin-left:auto;
 }
 .scard.sel .chk{background:${C.orange};border-color:${C.orange}}
-.s-emoji{font-size:28px;flex-shrink:0}
+.s-icon{
+  width:44px;height:44px;border-radius:10px;flex-shrink:0;
+  background:${C.orangeDim};border:1px solid rgba(255,107,26,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;
+  color:${C.orange};letter-spacing:0;text-align:center;
+}
 .s-info{flex:1;min-width:0}
 .s-name{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px;color:${C.white}}
 .s-desc{font-size:13px;color:${C.mutedLight};line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -288,17 +294,17 @@ const css2end = `
 `;
 
 const SESSIONS = [
-  { id:"1on1",  emoji:"üèÄ", name:"1-on-1 Training",  desc:"Fully personalized sessions focused entirely on your development and individual goals.", price:"$65",  unit:"/ session" },
-  { id:"small", emoji:"üë•", name:"Small Group (2‚Äì5)", desc:"Train alongside peers in a tight-knit, competitive, and high-energy environment.",    price:"$45", unit:"/ person"  },
-  { id:"large", emoji:"üèüÔ∏è", name:"Large Group (6+)",  desc:"Ideal for teams, clubs, or AAU squads. Structured drills and team-level development.", price:"$25", unit:"/ person"  },
+  { id:"1on1",  icon:"1v1", name:"1-on-1 Training",  desc:"Fully personalized sessions focused entirely on your development and individual goals.", price:"$65",  unit:"/ session" },
+  { id:"small", icon:"2-5", name:"Small Group (2-5)", desc:"Train alongside peers in a tight-knit, competitive, and high-energy environment.",    price:"$45", unit:"/ person"  },
+  { id:"large", icon:"6+",  name:"Large Group (6+)",  desc:"Ideal for teams, clubs, or AAU squads. Structured drills and team-level development.", price:"$25", unit:"/ person"  },
 ];
 
 const POSITIONS = ["Point Guard","Shooting Guard","Small Forward","Power Forward","Center","Multiple"];
-const LEVELS    = ["Beginner","Recreational","HS JV","HS Varsity","AAU / Club","Collegiate","Pro / Post-College"];
-const EXPERIENCE = ["< 1 year","1‚Äì3 years","3‚Äì5 years","5‚Äì10 years","10+ years"];
+const LEVELS    = ["Beginner","Recreational","HS JV","HS Varsity","AAU / Club","Collegiate"];
+const EXPERIENCE = ["Less than 1 year","1-3 years","3-5 years","5-10 years","10+ years"];
 const GOALS = [
-  "Improve ball handling","Sharpen shooting","Increase athleticism","Develop post game",
-  "Basketball IQ","College / pro prep","Build confidence","Stay active & have fun",
+  "Improve ball handling","Sharpen shooting","Develop post game",
+  "Basketball IQ","College prep","Build confidence",
 ];
 
 const EMAILJS_SERVICE  = "service_3feg00e";
@@ -382,7 +388,7 @@ export default function App() {
 
   function toggleDay(d)  { setActiveDays(p=>p.includes(d)?p.filter(x=>x!==d):[...p,d]); }
   function toggleTime(t) { setActiveTimes(p=>p.includes(t)?p.filter(x=>x!==t):[...p,t]); }
-  function saveAdmin()   { setSavedNote("‚úì Changes saved!"); setTimeout(()=>setSavedNote(""),2500); }
+  function saveAdmin()   { setSavedNote("Changes saved!"); setTimeout(()=>setSavedNote(""),2500); }
   function adminLogin()  {
     if(adminPw===COACH_PASSWORD){ setAdminAuthed(true); setAdminErr(""); setAdminPw(""); }
     else { setAdminErr("Incorrect password. Try again."); }
@@ -409,11 +415,11 @@ export default function App() {
           <div className="page">
             {/* Hero */}
             <div style={{marginBottom:40}}>
-              <div className="eyebrow">üèÄ Elite Basketball Development</div>
+              <div className="eyebrow">Elite Basketball Development</div>
               <h1 className="hero-h1">Train Hard.<span className="acc">Play Better.</span></h1>
               <p className="hero-sub">Professional coaching for athletes at every level. 1-on-1 and group sessions in Tampa, FL.</p>
               <div className="cta-row">
-                <button className="btn-main" onClick={()=>{setTab("book");setBkDone(false);}}>Book a Session ‚Üí</button>
+                <button className="btn-main" onClick={()=>{setTab("book");setBkDone(false);}}>Book a Session</button>
                 <button className="btn-ghost" onClick={()=>{setTab("intake");setStep(0);setIntakeDone(false);}}>New Athlete Form</button>
               </div>
             </div>
@@ -427,7 +433,7 @@ export default function App() {
             <div className="sgrid" style={{marginBottom:24}}>
               {SESSIONS.map(s=>(
                 <div key={s.id} className="scard" onClick={()=>goBook(s.id)}>
-                  <span className="s-emoji">{s.emoji}</span>
+                  <div className="s-icon">{s.icon}</div>
                   <div className="s-info">
                     <div className="s-name">{s.name}</div>
                     <div className="s-desc">{s.desc}</div>
@@ -453,7 +459,7 @@ export default function App() {
 
               {/* Sidebar Card */}
               <div className="bio-card">
-                <div className="bio-avatar">üèÄ</div>
+                <div className="bio-avatar" style={{fontSize:28,fontFamily:"'Barlow Condensed',sans-serif",fontWeight:900,letterSpacing:1}}>MR</div>
                 <div className="bio-name">Matt Richie</div>
                 <div className="bio-title">Head Trainer & Founder</div>
                 <div className="bio-divider"/>
@@ -462,31 +468,31 @@ export default function App() {
                 <div className="bio-stat"><span className="bio-stat-label">Location</span><span className="bio-stat-val">Tampa, FL</span></div>
                 <div className="bio-stat"><span className="bio-stat-label">Specialty</span><span className="bio-stat-val">Fundamentals</span></div>
                 <div className="bio-divider"/>
-                <button className="btn-main" style={{width:"100%",borderRadius:10}} onClick={()=>{setTab("book");setBkDone(false);}}>Book a Session ‚Üí</button>
+                <button className="btn-main" style={{width:"100%",borderRadius:10}} onClick={()=>{setTab("book");setBkDone(false);}}>Book a Session</button>
               </div>
 
               {/* Main Content */}
               <div className="bio-content">
 
                 <div className="bio-section">
-                  <div className="bio-section-title">üìñ My Story</div>
+                  <div className="bio-section-title">My Story</div>
                   <p>Coach Matt grew up in Indiana, where his love for basketball took root at the age of 8. What began as a passion quickly evolved into a lifelong commitment to the game ‚Äî one defined by relentless work ethic, competitive drive, and an unwavering dedication to growth.</p>
                   <p>After an accomplished playing career, Coach Matt turned that same energy toward developing the next generation of players. He has coached athletes across all levels ‚Äî from beginners just learning the game to elite varsity competitors ‚Äî and brings the same intensity and attention to detail to every single session.</p>
                 </div>
 
                 <div className="bio-section">
-                  <div className="bio-section-title">üèÜ Playing Background</div>
+                  <div className="bio-section-title">Playing Background</div>
                   <p>Coach Matt's playing career speaks for itself. As a standout performer in Indiana ‚Äî one of the country's most competitive high school basketball landscapes ‚Äî he established himself as a complete, high-IQ player on both ends of the floor.</p>
                   <div className="bio-highlights">
-                    <div className="bio-highlight"><strong>High School Stats</strong>Averaged 20 PPG, 6 APG &amp; 6 RPG</div>
-                    <div className="bio-highlight"><strong>All-Conference</strong>1st Team All-Conference ‚Äî 2 consecutive years</div>
-                    <div className="bio-highlight"><strong>ü•á International</strong>Gold Medal ‚Äî Team USA 17U, United World Games, Austria</div>
-                    <div className="bio-highlight"><strong>College</strong>Played collegiate basketball ¬∑ B.S. in Business Management</div>
+                    <div className="bio-highlight"><strong>High School Stats</strong>Averaged 20 PPG, 6 APG and 6 RPG</div>
+                    <div className="bio-highlight"><strong>All-Conference</strong>1st Team All-Conference - 2 consecutive years</div>
+                    <div className="bio-highlight"><strong>International</strong>Gold Medal - Team USA 17U, United World Games, Austria</div>
+                    <div className="bio-highlight"><strong>College</strong>Played collegiate basketball - B.S. in Business Management</div>
                   </div>
                 </div>
 
                 <div className="bio-section">
-                  <div className="bio-section-title">üéì Coaching Philosophy</div>
+                  <div className="bio-section-title">Coaching Philosophy</div>
                   <p>At Firm Foundation Hoops, everything starts with the fundamentals. Coach Matt believes that elite players aren't built on highlight plays ‚Äî they're built through mastery of the basics: ball handling, proper shooting mechanics, and the ability to create space and opportunities with and without the basketball.</p>
                   <p>His coaching style is uplifting, regimented, detail-oriented, and deeply passionate. Every rep has a purpose. Every correction is an investment. Athletes don't just leave better players ‚Äî they leave with a stronger understanding of the game.</p>
                   <div style={{
@@ -502,13 +508,13 @@ export default function App() {
                 </div>
 
                 <div className="bio-section">
-                  <div className="bio-section-title">‚≠ê What We Focus On</div>
+                  <div className="bio-section-title">What We Focus On</div>
                   <p>Every training session at Firm Foundation Hoops is built around three core pillars that Coach Matt believes separate good players from great ones.</p>
                   <div className="bio-highlights">
-                    <div className="bio-highlight"><strong>üèÄ Ball Handling</strong>Developing tight, confident, game-speed dribbling under pressure</div>
-                    <div className="bio-highlight"><strong>üéØ Shooting Form</strong>Building repeatable, mechanically sound shooting technique</div>
-                    <div className="bio-highlight"><strong>üß† Movement & IQ</strong>Learning how to get open and create advantages with and without the ball</div>
-                    <div className="bio-highlight"><strong>üí™ Mindset</strong>Instilling discipline, confidence, and a competitive standard in every athlete</div>
+                    <div className="bio-highlight"><strong>Ball Handling</strong>Developing tight, confident, game-speed dribbling under pressure</div>
+                    <div className="bio-highlight"><strong>Shooting Form</strong>Building repeatable, mechanically sound shooting technique</div>
+                    <div className="bio-highlight"><strong>Movement and IQ</strong>Learning how to get open and create advantages with and without the ball</div>
+                    <div className="bio-highlight"><strong>Mindset</strong>Instilling discipline, confidence, and a competitive standard in every athlete</div>
                   </div>
                 </div>
 
@@ -526,7 +532,7 @@ export default function App() {
                   <div className="success-ring">‚úì</div>
                   <h2>You're In!</h2>
                   <p>Thanks {fi.firstName||"Athlete"}! We've received your info and will reach out soon to get your training started.</p>
-                  <button className="btn-main" onClick={()=>{setTab("book");setBkDone(false);}}>Book Your First Session ‚Üí</button>
+                  <button className="btn-main" onClick={()=>{setTab("book");setBkDone(false);}}>Book Your First Session</button>
                 </div>
               ) : (
                 <>
@@ -609,10 +615,10 @@ export default function App() {
                   </>)}
 
                   <div className="step-nav">
-                    {step>0 ? <button className="btn-back" onClick={()=>setStep(s=>s-1)}>‚Üê Back</button> : <div/>}
+                    {step>0 ? <button className="btn-back" onClick={()=>setStep(s=>s-1)}>Back</button> : <div/>}
                     {step<TOTAL_STEPS-1
-                      ? <button className="btn-main" onClick={()=>setStep(s=>s+1)}>Continue ‚Üí</button>
-                      : <button className="btn-main" onClick={()=>setIntakeDone(true)}>Submit ‚Üí</button>
+                      ? <button className="btn-main" onClick={()=>setStep(s=>s+1)}>Continue</button>
+                      : <button className="btn-main" onClick={()=>setIntakeDone(true)}>Submit</button>
                     }
                   </div>
                 </>
@@ -626,17 +632,17 @@ export default function App() {
           <div className="page">
             {bkDone ? (
               <div className="success">
-                <div className="success-ring">üèÄ</div>
+                <div className="success-ring" style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:900,fontSize:22,color:C.orange}}>DONE</div>
                 <h2>You're Booked!</h2>
                 <p>Thanks {bk.name||"Athlete"}! Your session request has been received. We'll confirm within 24 hours.</p>
-                <button className="btn-main" onClick={()=>{setBkDone(false);setBkError("");setBkSending(false);setBk({session:"",day:"",time:"",name:"",email:"",phone:"",notes:""});}}>Book Another ‚Üí</button>
+                <button className="btn-main" onClick={()=>{setBkDone(false);setBkError("");setBkSending(false);setBk({session:"",day:"",time:"",name:"",email:"",phone:"",notes:""});}}>Book Another</button>
               </div>
             ) : (<>
               <div className="sec-tag">Scheduling</div>
               <div className="sec-h2">Book a Session</div>
 
               <div className="free-banner">
-                <div className="free-icon">üéÅ</div>
+                <div className="free-icon" style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:900,fontSize:13,color:C.green}}>FREE</div>
                 <div className="free-text">
                   <strong>Your First Session is FREE</strong>
                   <span>No commitment. Come experience Firm Foundation Hoops ‚Äî on us.</span>
@@ -656,7 +662,7 @@ export default function App() {
                     <div className="sgrid">
                       {SESSIONS.map(s=>(
                         <div key={s.id} className={`scard ${bk.session===s.id?"sel":""}`} onClick={()=>setBk(p=>({...p,session:s.id}))}>
-                          <span className="s-emoji">{s.emoji}</span>
+                          <div className="s-icon">{s.icon}</div>
                           <div className="s-info">
                             <div className="s-name">{s.name}</div>
                             <div className="s-desc">{s.desc}</div>
@@ -723,7 +729,7 @@ export default function App() {
                     </div>
                     {bkError && <p style={{color:"#FF6B6B",fontSize:13,marginBottom:12,textAlign:"center"}}>{bkError}</p>}
                     <button className="btn-main-full" onClick={sendBooking} disabled={bkSending} style={{opacity:bkSending?.6:1}}>
-                      {bkSending ? "Sending..." : "Request Session ‚Üí"}
+                      {bkSending ? "Sending..." : "Request Session"}
                     </button>
                   </div>
                 </div>
@@ -738,7 +744,7 @@ export default function App() {
           <div className="page">
             {!adminAuthed ? (
               <div className="admin-login">
-                <div style={{fontSize:40,marginBottom:12}}>üîí</div>
+                <div style={{fontSize:40,marginBottom:12,color:C.orange,fontFamily:"'Barlow Condensed',sans-serif",fontWeight:900}}>COACH</div>
                 <h2>Coach Login</h2>
                 <p>Enter your password to manage availability.</p>
                 <div className="fgroup" style={{textAlign:"left",marginBottom:12}}>
@@ -751,8 +757,8 @@ export default function App() {
                   />
                 </div>
                 {adminErr && <p style={{color:"#FF6B6B",fontSize:13,marginBottom:12}}>{adminErr}</p>}
-                <button className="btn-main" style={{width:"100%",borderRadius:10}} onClick={adminLogin}>Sign In ‚Üí</button>
-                <button className="btn-back" style={{marginTop:12,width:"100%",borderRadius:10,textAlign:"center"}} onClick={()=>setTab("home")}>‚Üê Back to Home</button>
+                <button className="btn-main" style={{width:"100%",borderRadius:10}} onClick={adminLogin}>Sign In</button>
+                <button className="btn-back" style={{marginTop:12,width:"100%",borderRadius:10,textAlign:"center"}} onClick={()=>setTab("home")}>Back to Home</button>
               </div>
             ) : (
               <div className="admin-dash">
@@ -766,7 +772,7 @@ export default function App() {
 
                 {/* Days */}
                 <div className="admin-section">
-                  <div className="admin-section-title">üìÖ Available Days</div>
+                  <div className="admin-section-title">Available Days</div>
                   <p style={{fontSize:13,color:C.muted,marginBottom:16}}>Tap a day to toggle it on or off for athletes to select.</p>
                   <div className="admin-days">
                     {ALL_DAYS.map(d=>(
@@ -780,7 +786,7 @@ export default function App() {
 
                 {/* Times */}
                 <div className="admin-section">
-                  <div className="admin-section-title">‚è∞ Available Time Slots</div>
+                  <div className="admin-section-title">Available Time Slots</div>
                   <p style={{fontSize:13,color:C.muted,marginBottom:16}}>Toggle time slots on or off. Disabled slots will appear grayed out for athletes.</p>
                   <div className="admin-slots">
                     {ALL_TIMES.map(t=>(
@@ -813,14 +819,14 @@ export default function App() {
             Firm Foundation <span style={{color:C.orange}}>Hoops</span>
           </div>
           <div style={{display:"flex",alignItems:"center",gap:8,fontSize:15,color:C.mutedLight}}>
-            <span style={{fontSize:18}}>üìû</span>
+            <span style={{fontSize:13,fontWeight:700,color:C.muted}}>PH:</span>
             <a href="tel:7273664401" style={{color:C.orange,fontWeight:600,textDecoration:"none",letterSpacing:.5}}>727-366-4401</a>
           </div>
           <div style={{display:"flex",alignItems:"center",gap:8,fontSize:15,color:C.mutedLight}}>
-            <span style={{fontSize:18}}>‚úâÔ∏è</span>
+            <span style={{fontSize:13,fontWeight:700,color:C.muted}}>EM:</span>
             <a href="mailto:ffhoops813@gmail.com" style={{color:C.orange,fontWeight:600,textDecoration:"none",letterSpacing:.5}}>ffhoops813@gmail.com</a>
           </div>
-          <div style={{fontSize:12,color:C.muted}}>¬© {new Date().getFullYear()} Firm Foundation Hoops. All rights reserved.</div>
+          <div style={{fontSize:12,color:C.muted}}>{new Date().getFullYear()} Firm Foundation Hoops. All rights reserved.</div>
           <button className="admin-logout" style={{fontSize:11,padding:"6px 14px"}} onClick={()=>{setTab("admin");setAdminAuthed(false);setAdminPw("");}}>Coach Login</button>
         </footer>
 
