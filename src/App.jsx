@@ -464,7 +464,7 @@ export default function App() {
                 <div className="bio-title">Head Trainer & Founder</div>
                 <div className="bio-divider"/>
                 <div className="bio-stat"><span className="bio-stat-label">Experience</span><span className="bio-stat-val">30 Years</span></div>
-                <div className="bio-stat"><span className="bio-stat-label">Athletes</span><span className="bio-stat-val">Ages 8‚Äì18</span></div>
+                <div className="bio-stat"><span className="bio-stat-label">Athletes</span><span className="bio-stat-val">Ages 8-18</span></div>
                 <div className="bio-stat"><span className="bio-stat-label">Location</span><span className="bio-stat-val">Tampa, FL</span></div>
                 <div className="bio-stat"><span className="bio-stat-label">Specialty</span><span className="bio-stat-val">Fundamentals</span></div>
                 <div className="bio-divider"/>
@@ -476,13 +476,13 @@ export default function App() {
 
                 <div className="bio-section">
                   <div className="bio-section-title">My Story</div>
-                  <p>Coach Matt grew up in Indiana, where his love for basketball took root at the age of 8. What began as a passion quickly evolved into a lifelong commitment to the game ‚Äî one defined by relentless work ethic, competitive drive, and an unwavering dedication to growth.</p>
-                  <p>After an accomplished playing career, Coach Matt turned that same energy toward developing the next generation of players. He has coached athletes across all levels ‚Äî from beginners just learning the game to elite varsity competitors ‚Äî and brings the same intensity and attention to detail to every single session.</p>
+                  <p>Coach Matt grew up in Indiana, where his love for basketball took root at the age of 8. What began as a passion quickly evolved into a lifelong commitment to the game, one defined by relentless work ethic, competitive drive, and an unwavering dedication to growth.</p>
+                  <p>After an accomplished playing career, Coach Matt turned that same energy toward developing the next generation of players. He has coached athletes across all levels, from beginners just learning the game to elite varsity competitors, and brings the same intensity and attention to detail to every single session.</p>
                 </div>
 
                 <div className="bio-section">
                   <div className="bio-section-title">Playing Background</div>
-                  <p>Coach Matt's playing career speaks for itself. As a standout performer in Indiana ‚Äî one of the country's most competitive high school basketball landscapes ‚Äî he established himself as a complete, high-IQ player on both ends of the floor.</p>
+                  <p>Coach Matt's playing career speaks for itself. As a standout performer in Indiana, one of the country's most competitive high school basketball landscapes, he established himself as a complete, high-IQ player on both ends of the floor.</p>
                   <div className="bio-highlights">
                     <div className="bio-highlight"><strong>High School Stats</strong>Averaged 20 PPG, 6 APG and 6 RPG</div>
                     <div className="bio-highlight"><strong>All-Conference</strong>1st Team All-Conference - 2 consecutive years</div>
