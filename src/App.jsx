@@ -446,7 +446,7 @@ export default function App() {
                 </div>
               ))}
             </div>
-            <p style={{fontSize:12,color:C.muted,textAlign:"center"}}>Tap any session to book ‚Üí Your first session is <span style={{color:C.green,fontWeight:600}}>FREE</span></p>
+            <p style={{fontSize:12,color:C.muted,textAlign:"center"}}>Tap any session to book. Your first session is <span style={{color:C.green,fontWeight:600}}>FREE</span></p>
           </div>
         )}
 
