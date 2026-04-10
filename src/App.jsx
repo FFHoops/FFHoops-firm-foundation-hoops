@@ -493,7 +493,7 @@ export default function App() {
 
                 <div className="bio-section">
                   <div className="bio-section-title">Coaching Philosophy</div>
-                  <p>At Firm Foundation Hoops, everything starts with the fundamentals. Coach Matt believes that elite players aren't built on highlight plays ‚Äî they're built through mastery of the basics: ball handling, proper shooting mechanics, and the ability to create space and opportunities with and without the basketball.</p>
+                  <p>At Firm Foundation Hoops, everything starts with the fundamentals. Coach Matt believes that elite players aren't built on highlight plays, they're built through mastery of the basics: ball handling, proper shooting mechanics, and the ability to create space and opportunities with and without the basketball.</p>
                   <p>His coaching style is uplifting, regimented, detail-oriented, and deeply passionate. Every rep has a purpose. Every correction is an investment. Athletes don't just leave better players, they leave with a stronger understanding of the game.</p>
                   <div style={{
                     margin:"20px 0 0",padding:"18px 20px",
@@ -509,7 +509,7 @@ export default function App() {
 
                 <div className="bio-section">
                   <div className="bio-section-title">What We Focus On</div>
-                  <p>Every training session at Firm Foundation Hoops is built around three core pillars that Coach Matt believes separate good players from great ones.</p>
+                  <p>Every training session at Firm Foundation Hoops is built around four key pillars that Coach Matt believes separate good players from great ones.</p>
                   <div className="bio-highlights">
                     <div className="bio-highlight"><strong>Ball Handling</strong>Developing tight, confident, game-speed dribbling under pressure</div>
                     <div className="bio-highlight"><strong>Shooting Form</strong>Building repeatable, mechanically sound shooting technique</div>
@@ -645,7 +645,7 @@ export default function App() {
                 <div className="free-icon" style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:900,fontSize:13,color:C.green}}>FREE</div>
                 <div className="free-text">
                   <strong>Your First Session is FREE</strong>
-                  <span>No commitment. Come experience Firm Foundation Hoops ‚Äî on us.</span>
+                  <span>No commitment. Come experience Firm Foundation Hoops on us.</span>
                 </div>
               </div>
 
