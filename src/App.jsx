@@ -494,7 +494,7 @@ export default function App() {
                 <div className="bio-section">
                   <div className="bio-section-title">Coaching Philosophy</div>
                   <p>At Firm Foundation Hoops, everything starts with the fundamentals. Coach Matt believes that elite players aren't built on highlight plays ‚Äî they're built through mastery of the basics: ball handling, proper shooting mechanics, and the ability to create space and opportunities with and without the basketball.</p>
-                  <p>His coaching style is uplifting, regimented, detail-oriented, and deeply passionate. Every rep has a purpose. Every correction is an investment. Athletes don't just leave better players ‚Äî they leave with a stronger understanding of the game.</p>
+                  <p>His coaching style is uplifting, regimented, detail-oriented, and deeply passionate. Every rep has a purpose. Every correction is an investment. Athletes don't just leave better players, they leave with a stronger understanding of the game.</p>
                   <div style={{
                     margin:"20px 0 0",padding:"18px 20px",
                     borderLeft:`3px solid ${C.orange}`,
@@ -503,7 +503,7 @@ export default function App() {
                     <p style={{fontStyle:"italic",fontSize:15,color:C.white,lineHeight:1.6,margin:0}}>
                       "Hard work beats talent when talent doesn't work hard."
                     </p>
-                    <p style={{fontSize:12,color:C.muted,marginTop:8,marginBottom:0,fontWeight:600}}>‚Äî Tim Notke</p>
+                    <p style={{fontSize:12,color:C.muted,marginTop:8,marginBottom:0,fontWeight:600}}>- Tim Notke</p>
                   </div>
                 </div>
 
