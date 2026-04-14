@@ -339,11 +339,30 @@ export default function App() {
   const [adminPw, setAdminPw] = useState("");
   const [adminErr, setAdminErr] = useState("");
   const [savedNote, setSavedNote] = useState("");
-  const [activeDays, setActiveDays]   = useState(["MON","TUE","WED","THU","FRI","SAT","SUN"]);
-  const [activeTimes, setActiveTimes] = useState(["7:00 AM","8:30 AM","10:00 AM","1:00 PM","2:30 PM","4:00 PM","7:00 PM","8:30 PM"]);
+  const [selectedAdminDay, setSelectedAdminDay] = useState("MON");
 
-  const SLOTS = ALL_TIMES.map(t => ({ t, taken: !activeTimes.includes(t) }));
-  const DAYS  = activeDays.length > 0 ? ALL_DAYS : ALL_DAYS;
+  // Per-day schedule: load from localStorage if available, otherwise use defaults
+  const defaultSchedule = Object.fromEntries(ALL_DAYS.map(d => [d, ["4:00 PM","5:30 PM","7:00 PM"]]));
+  const [schedule, setSchedule] = useState(() => {
+    try {
+      const saved = localStorage.getItem("ffhoops_schedule");
+      return saved ? JSON.parse(saved) : defaultSchedule;
+    } catch(e) {
+      return defaultSchedule;
+    }
+  });
+
+  // For booking: show all days that have at least one slot, slots based on selected day
+  const activeDays = ALL_DAYS.filter(d => schedule[d] && schedule[d].length > 0);
+  const SLOTS = ALL_TIMES.map(t => ({ t, taken: !bk.day || !schedule[bk.day]?.includes(t) }));
+
+  function toggleDayTime(day, time) {
+    setSchedule(prev => {
+      const current = prev[day] || [];
+      const updated = current.includes(time) ? current.filter(t=>t!==time) : [...current, time];
+      return { ...prev, [day]: updated };
+    });
+  }
 
   const TOTAL_STEPS = 4;
   const toggle = (field, val) =>
@@ -386,9 +405,15 @@ export default function App() {
     setBkSending(false);
   }
 
-  function toggleDay(d)  { setActiveDays(p=>p.includes(d)?p.filter(x=>x!==d):[...p,d]); }
-  function toggleTime(t) { setActiveTimes(p=>p.includes(t)?p.filter(x=>x!==t):[...p,t]); }
-  function saveAdmin()   { setSavedNote("Changes saved!"); setTimeout(()=>setSavedNote(""),2500); }
+  function saveAdmin() {
+    try {
+      localStorage.setItem("ffhoops_schedule", JSON.stringify(schedule));
+      setSavedNote("Changes saved!");
+    } catch(e) {
+      setSavedNote("Saved for this session.");
+    }
+    setTimeout(()=>setSavedNote(""),2500);
+  }
   function adminLogin()  {
     if(adminPw===COACH_PASSWORD){ setAdminAuthed(true); setAdminErr(""); setAdminPw(""); }
     else { setAdminErr("Incorrect password. Try again."); }
@@ -687,8 +712,8 @@ export default function App() {
                   </div>
                   <div className="book-step-body">
                     <div className="day-strip">
-                      {ALL_DAYS.filter(d=>activeDays.includes(d)).map(d=>(
-                        <div key={d} className={`day-btn ${bk.day===d?"sel":""}`} onClick={()=>setBk(p=>({...p,day:d}))}>{d}</div>
+                      {activeDays.map(d=>(
+                        <div key={d} className={`day-btn ${bk.day===d?"sel":""}`} onClick={()=>setBk(p=>({...p,day:d,time:""}))}>{ d}</div>
                       ))}
                     </div>
                   </div>
@@ -770,31 +795,41 @@ export default function App() {
                   <button className="admin-logout" onClick={()=>{setAdminAuthed(false);setTab("home");}}>Sign Out</button>
                 </div>
 
-                {/* Days */}
                 <div className="admin-section">
-                  <div className="admin-section-title">Available Days</div>
-                  <p style={{fontSize:13,color:C.muted,marginBottom:16}}>Tap a day to toggle it on or off for athletes to select.</p>
-                  <div className="admin-days">
+                  <div className="admin-section-title">Schedule by Day</div>
+                  <p style={{fontSize:13,color:C.muted,marginBottom:16}}>Select a day, then toggle which time slots are available. Days with no slots turned on will not appear for athletes.</p>
+
+                  {/* Day selector */}
+                  <div className="admin-days" style={{marginBottom:24}}>
                     {ALL_DAYS.map(d=>(
-                      <div key={d} className={`admin-day ${activeDays.includes(d)?"on":""}`} onClick={()=>toggleDay(d)}>
-                        {d}<br/>
-                        <span style={{fontSize:9,marginTop:2,display:"block"}}>{activeDays.includes(d)?"ON":"OFF"}</span>
+                      <div
+                        key={d}
+                        className={`admin-day ${selectedAdminDay===d?"on":""}`}
+                        onClick={()=>setSelectedAdminDay(d)}
+                        style={{position:"relative"}}
+                      >
+                        {d}
+                        <span style={{fontSize:9,marginTop:2,display:"block",color:schedule[d]?.length>0?C.orange:C.muted}}>
+                          {schedule[d]?.length>0 ? `${schedule[d].length} slot${schedule[d].length>1?"s":""}` : "OFF"}
+                        </span>
                       </div>
                     ))}
                   </div>
-                </div>
 
-                {/* Times */}
-                <div className="admin-section">
-                  <div className="admin-section-title">Available Time Slots</div>
-                  <p style={{fontSize:13,color:C.muted,marginBottom:16}}>Toggle time slots on or off. Disabled slots will appear grayed out for athletes.</p>
+                  {/* Time slots for selected day */}
+                  <div style={{marginBottom:8,fontSize:13,fontWeight:600,color:C.white}}>
+                    {selectedAdminDay} ‚Äî Toggle available times:
+                  </div>
                   <div className="admin-slots">
-                    {ALL_TIMES.map(t=>(
-                      <div key={t} className={`admin-slot ${activeTimes.includes(t)?"on":""}`} onClick={()=>toggleTime(t)}>
-                        <span className="admin-slot-time">{t}</span>
-                        <div className="admin-toggle"/>
-                      </div>
-                    ))}
+                    {ALL_TIMES.map(t=>{
+                      const isOn = schedule[selectedAdminDay]?.includes(t);
+                      return (
+                        <div key={t} className={`admin-slot ${isOn?"on":""}`} onClick={()=>toggleDayTime(selectedAdminDay,t)}>
+                          <span className="admin-slot-time">{t}</span>
+                          <div className="admin-toggle"/>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 
