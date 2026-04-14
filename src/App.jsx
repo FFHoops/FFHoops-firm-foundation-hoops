@@ -97,7 +97,7 @@ nav{
 .chk{
   width:24px;height:24px;border-radius:50%;border:2px solid ${C.border};
   display:flex;align-items:center;justify-content:center;
-  font-size:12px;color:#fff;font-weight:700;flex-shrink:0;transition:all .2s;
+  font-size:11px;color:#fff;font-weight:700;flex-shrink:0;transition:all .2s;
   margin-left:auto;
 }
 .scard.sel .chk{background:${C.orange};border-color:${C.orange}}
@@ -313,7 +313,7 @@ const EMAILJS_KEY      = "aWoyLdSWPELufF-hk";
 
 const COACH_PASSWORD = "ffhoops1";
 
-const ALL_TIMES = ["7:00 AM","8:30 AM","10:00 AM","11:30 AM","1:00 PM","2:30 PM","4:00 PM","5:30 PM","7:00 PM","8:30 PM"];
+const ALL_TIMES = ["7:00 AM","8:00 AM","9:00 AM","10:00 AM","11:00 AM","12:00 PM","1:00 PM","2:00 PM","3:00 PM","4:00 PM","5:00 PM","6:00 PM","7:00 PM","8:00 PM"];
 const ALL_DAYS  = ["MON","TUE","WED","THU","FRI","SAT","SUN"];
 
 export default function App() {
@@ -342,7 +342,7 @@ export default function App() {
   const [selectedAdminDay, setSelectedAdminDay] = useState("MON");
 
   // Per-day schedule: load from localStorage if available, otherwise use defaults
-  const defaultSchedule = Object.fromEntries(ALL_DAYS.map(d => [d, ["4:00 PM","5:30 PM","7:00 PM"]]));
+  const defaultSchedule = Object.fromEntries(ALL_DAYS.map(d => [d, ["4:00 PM","5:00 PM","6:00 PM","7:00 PM"]]));
   const [schedule, setSchedule] = useState(() => {
     try {
       const saved = localStorage.getItem("ffhoops_schedule");
@@ -467,7 +467,7 @@ export default function App() {
                     <div className="s-price">{s.price}</div>
                     <small style={{fontSize:11,color:C.muted}}>{s.unit}</small>
                   </div>
-                  <div className="chk">‚úì</div>
+                  <div className="chk">+</div>
                 </div>
               ))}
             </div>
@@ -627,7 +627,7 @@ export default function App() {
                     <div className="pick-grid" style={{marginBottom:28}}>
                       {GOALS.map(g=>(
                         <div key={g} className={`pick-opt ${fi.goals.includes(g)?"sel":""}`} onClick={()=>toggle("goals",g)}>
-                          <div className="pick-sq">{fi.goals.includes(g)?"‚úì":""}</div>{g}
+                          <div className="pick-sq">{fi.goals.includes(g)?"*":""}</div>{g}
                         </div>
                       ))}
                     </div>
@@ -679,7 +679,7 @@ export default function App() {
                 {/* Step 1 ‚Äî Session Type */}
                 <div className="book-step">
                   <div className="book-step-header">
-                    <div className={`step-num ${bk.session?"done":""}`}>{bk.session?"‚úì":"1"}</div>
+                    <div className={`step-num ${bk.session?"done":""}`}>{bk.session?"OK":"1"}</div>
                     <div className="book-step-title">Choose a Session Type</div>
                     {bk.session && <div style={{marginLeft:"auto",fontSize:12,color:C.orange,fontWeight:600}}>{SESSIONS.find(s=>s.id===bk.session)?.name}</div>}
                   </div>
@@ -696,7 +696,7 @@ export default function App() {
                             <div className="s-price">{s.price}</div>
                             <small style={{fontSize:11,color:C.muted}}>{s.unit}</small>
                           </div>
-                          <div className="chk">‚úì</div>
+                          <div className="chk">+</div>
                         </div>
                       ))}
                     </div>
@@ -706,7 +706,7 @@ export default function App() {
                 {/* Step 2 ‚Äî Day */}
                 <div className="book-step">
                   <div className="book-step-header">
-                    <div className={`step-num ${bk.day?"done":""}`}>{bk.day?"‚úì":"2"}</div>
+                    <div className={`step-num ${bk.day?"done":""}`}>{bk.day?"OK":"2"}</div>
                     <div className="book-step-title">Pick a Day</div>
                     {bk.day && <div style={{marginLeft:"auto",fontSize:12,color:C.orange,fontWeight:600}}>{bk.day}</div>}
                   </div>
@@ -722,7 +722,7 @@ export default function App() {
                 {/* Step 3 ‚Äî Time */}
                 <div className="book-step">
                   <div className="book-step-header">
-                    <div className={`step-num ${bk.time?"done":""}`}>{bk.time?"‚úì":"3"}</div>
+                    <div className={`step-num ${bk.time?"done":""}`}>{bk.time?"OK":"3"}</div>
                     <div className="book-step-title">Pick a Time</div>
                     {bk.time && <div style={{marginLeft:"auto",fontSize:12,color:C.orange,fontWeight:600}}>{bk.time}</div>}
                   </div>
