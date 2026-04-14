@@ -294,8 +294,8 @@ const css2end = `
 `;
 
 const SESSIONS = [
-  { id:"1on1",  icon:"1v1", name:"1-on-1 Training",  desc:"Fully personalized sessions focused entirely on your development and individual goals.", price:"$65",  unit:"/ session" },
-  { id:"small", icon:"2-5", name:"Small Group (2-5)", desc:"Train alongside peers in a tight-knit, competitive, and high-energy environment.",    price:"$45", unit:"/ person"  },
+  { id:"1on1",  icon:"1v1", name:"1-on-1 Training",  desc:"Fully personalized sessions focused entirely on your development and individual goals.", price:"$50",  unit:"/ session" },
+  { id:"small", icon:"2-5", name:"Small Group (2-5)", desc:"Train alongside peers in a tight-knit, competitive, and high-energy environment.",    price:"$40", unit:"/ person"  },
   { id:"large", icon:"6+",  name:"Large Group (6+)",  desc:"Ideal for teams, clubs, or AAU squads. Structured drills and team-level development.", price:"$25", unit:"/ person"  },
 ];
 
